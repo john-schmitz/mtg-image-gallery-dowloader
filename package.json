@@ -1,0 +1,30 @@
+{
+  "name": "mtg-image-gallery-dowloader",
+  "version": "1.0.0",
+  "description": "downloads mtg card images ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Treeek/mtg-image-gallery-dowloader.git"
+  },
+  "keywords": [
+    "mtg"
+  ],
+  "author": "John Schmitz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Treeek/mtg-image-gallery-dowloader/issues"
+  },
+  "homepage": "https://github.com/Treeek/mtg-image-gallery-dowloader#readme",
+  "dependencies": {
+    "jsonfile": "^5.0.0",
+    "node-fetch": "^2.3.0",
+    "throttled-queue": "^1.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0"
+  }
+}
