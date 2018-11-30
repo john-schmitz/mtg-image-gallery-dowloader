@@ -30,27 +30,26 @@ async function boot() {
 
 			}
 			for (let i = 0; i < listaCartas.length; i++) {
-				const nomeCarta = listaCartas[i];
+				const nomeCarta = listaCartas[i].replace(/ $/, "");
 				throttle(() => {
-					if (!fs.existsSync(`./cardImages/${nomeCarta}.full.jpg`))
-						fetch("https://api.scryfall.com/cards/named?exact=" + nomeCarta).then((res) => {
-							console.log("baixado", nomeCarta);
-							return res.json();
-						}).then((carta) => {
-							const imageUrl = carta.image_uris.border_crop;
-							fetch(imageUrl).then(res => {
-								const dest = fs.createWriteStream(`./cardImages/${carta.name}.full.jpg`);
-								res.body.pipe(dest);
+					fs.access(`./cardImages/${nomeCarta}.full.jpg`, fs.constants.F_OK, (err) => {
+						if (err)
+							fetch("https://api.scryfall.com/cards/named?exact=" + nomeCarta).then((res) => {
+								return res.json();
+							}).then((carta) => {
+								const imageUrl = carta.image_uris.border_crop;
+								fetch(imageUrl).then(res => {
+									console.log("baixado ", carta.name);
+									const dest = fs.createWriteStream(`./cardImages/${carta.name.replace(/"/g, "")}.full.jpg`);
+									res.body.pipe(dest);
+								});
+							}).catch((err) => {
+								console.log(err);
 							});
-						}).catch((err) => {
-							console.log(err);
-						});
+					});
 				});
 			}
 		})
 		.catch(error => console.error(error));
-
 }
-
-
 boot();
