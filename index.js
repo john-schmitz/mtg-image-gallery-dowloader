@@ -30,7 +30,7 @@ async function boot() {
 
 			}
 			for (let i = 0; i < listaCartas.length; i++) {
-				const nomeCarta = listaCartas[i].replace(/ $/, "");
+				const nomeCarta = listaCartas[i].replace(/ $/, "").replace(" // ", "");
 				throttle(() => {
 					fs.access(`./cardImages/${nomeCarta}.full.jpg`, fs.constants.F_OK, (err) => {
 						if (err)
@@ -40,8 +40,10 @@ async function boot() {
 								const imageUrl = carta.image_uris.border_crop;
 								fetch(imageUrl).then(res => {
 									console.log("baixado ", carta.name);
-									const dest = fs.createWriteStream(`./cardImages/${carta.name.replace(/"/g, "")}.full.jpg`);
+									const dest = fs.createWriteStream(`./cardImages/${carta.name.replace(/"/g, "").replace(" // ", "").replace(/\?/g, "")}.full.jpg`);
 									res.body.pipe(dest);
+								}).catch(err => {
+									console.log(err);
 								});
 							}).catch((err) => {
 								console.log(err);
