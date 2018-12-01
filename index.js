@@ -1,14 +1,7 @@
-const throttledQueue = require("throttled-queue");
-const throttle = throttledQueue(1, 200);
-const fs = require("fs");
-
-const fetch = require("node-fetch");
-
-const jsonfile = require("jsonfile");
 const file = "./res/AllSets.json";
 
-
 async function boot() {
+	const jsonfile = require("jsonfile");
 	const listaCartas = [];
 	jsonfile.readFile(file)
 		.then((obj) => {
@@ -29,6 +22,10 @@ async function boot() {
 				}
 
 			}
+			const throttledQueue = require("throttled-queue");
+			const throttle = throttledQueue(1, 200);
+			const fetch = require("node-fetch");
+			const fs = require("fs");
 			for (let i = 0; i < listaCartas.length; i++) {
 				throttle(() => {
 					const nomeCarta = listaCartas[i].replace(/ $/, "").replace(" // ", "");
