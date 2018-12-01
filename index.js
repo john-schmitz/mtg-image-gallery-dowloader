@@ -30,8 +30,8 @@ async function boot() {
 
 			}
 			for (let i = 0; i < listaCartas.length; i++) {
-				const nomeCarta = listaCartas[i].replace(/ $/, "").replace(" // ", "");
 				throttle(() => {
+					const nomeCarta = listaCartas[i].replace(/ $/, "").replace(" // ", "");
 					fs.access(`./cardImages/${nomeCarta}.full.jpg`, fs.constants.F_OK, (err) => {
 						if (err)
 							fetch("https://api.scryfall.com/cards/named?exact=" + nomeCarta).then((res) => {
