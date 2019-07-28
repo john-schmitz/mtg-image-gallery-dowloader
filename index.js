@@ -16,6 +16,7 @@ async function boot() {
 	for (const key in obj) {
 		if (obj.hasOwnProperty(key)) {
 			const card = obj[key];
+			
 			if (intersection(card.printings, unsets)) {
 				continue;
 			}
@@ -23,6 +24,7 @@ async function boot() {
 			throttle(() => {
 				fs.access(`${finalPath}/${nomeCarta}.full.jpg`, fs.constants.F_OK, async (err) => {
 					if (err) {
+						try {
 							let res = await fetch("https://api.scryfall.com/cards/named?exact=" + nomeCarta);
 							let cardObject = await res.json()
 							let imageUrl;
@@ -40,6 +42,9 @@ async function boot() {
 							}).catch(err => {
 								console.log(err);
 							});
+						} catch (error) {
+							console.log("Error ", nomeCarta);
+						}
 					}
 				});
 			});
