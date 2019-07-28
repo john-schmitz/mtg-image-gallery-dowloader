@@ -4,7 +4,8 @@
   "description": "downloads mtg card images ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -21,10 +22,10 @@
   "homepage": "https://github.com/Treeek/mtg-image-gallery-dowloader#readme",
   "dependencies": {
     "jsonfile": "^5.0.0",
-    "node-fetch": "^2.3.0",
-    "throttled-queue": "^1.0.5"
+    "node-fetch": "^2.6.0",
+    "throttled-queue": "^1.0.6"
   },
   "devDependencies": {
-    "eslint": "^5.9.0"
+    "eslint": "^5.16.0"
   }
 }
